@@ -1,0 +1,48 @@
+include <stdio.h>
+
+struct Student {
+    int id;
+    char name[50];
+    float marks[5];
+    float total;
+    float average;
+    char grade;
+};
+
+void calculateGrade(struct Student* s) {
+    s->total = 0;
+    for (int i = 0; i < 5; i++) {
+        s->total += s->marks[i];
+    }
+    s->average = s->total / 5;
+    if (s->average >= 90) {
+        s->grade = 'A';
+    } else if (s->average >= 80) {
+        s->grade = 'B';
+    } else if (s->average >= 70) {
+        s->grade = 'C';
+    } else if (s->average >= 60) {
+        s->grade = 'D';
+    } else {
+        s->grade = 'F';
+    }
+}
+
+int main() {
+    struct Student s;
+    printf("Enter student ID: ");
+    scanf("%d", &s.id);
+    printf("Enter student name: ");
+    scanf(" %[^\n]%*c", s.name);
+    printf("Enter marks for 5 subjects: ");
+    for (int i = 0; i < 5; i++) {
+        scanf("%f", &s.marks[i]);
+    }
+    calculateGrade(&s);
+    printf("\nStudent ID: %d\n", s.id);
+    printf("Student Name: %s\n", s.name);
+    printf("Total Marks: %.2f\n", s.total);
+    printf("Average Marks: %.2f\n", s.average);
+    printf("Grade: %c\n", s.grade);
+    return 0;
+}
